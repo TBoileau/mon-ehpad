@@ -1,0 +1,68 @@
+{
+    "path": "cz-emoji",
+    "config": {
+        "cz-emoji": {
+            "symbol": true,
+            "questions": {
+                "scope": "Issue ID: #{issueId}"
+            },
+            "skipQuestions": ["issues"],
+            "types": [
+                {
+                  "emoji": "✨",
+                  "code": ":sparkles:",
+                  "description": "Introduce new features.",
+                  "name": "feat"
+                },
+                {
+                  "emoji": "🧑‍💻",
+                  "code": ":technologist:",
+                  "description": "Improve developer experience.",
+                  "name": "dx"
+                },
+                {
+                  "emoji": "🐛",
+                  "code": ":bug:",
+                  "description": "Fixing a bug.",
+                  "name": "fix"
+                },
+                {
+                  "emoji": "✏️️",
+                  "code": ":pencil2:",
+                  "description": "Fix typos.",
+                  "name": "typo"
+                },
+                {
+                  "emoji": "🔧",
+                  "code": ":wrench:",
+                  "description": "Add or update configuration files.",
+                  "name": "build"
+                },
+                {
+                  "emoji": "👷",
+                  "code": ":construction_worker:",
+                  "description": "Add or update CI build system.",
+                  "name": "ci"
+                },
+                {
+                  "emoji": "📝",
+                  "code": ":memo:",
+                  "description": "Add or update documentation.",
+                  "name": "docs"
+                },
+                {
+                  "emoji": "✅",
+                  "code": ":white_check_mark:",
+                  "description": "Add, update, or pass tests.",
+                  "name": "test"
+                },
+                {
+                  "emoji": "⚡️",
+                  "code": ":zap:",
+                  "description": "Improve performance.",
+                  "name": "perf"
+                }
+            ]
+        }
+    }
+}
