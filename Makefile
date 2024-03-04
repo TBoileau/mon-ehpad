@@ -1,5 +1,4 @@
 disable-xdebug=XDEBUG_MODE=off
-enable-xdebug=XDEBUG_MODE=coverage
 tools-bin-dir ?= bin
 env=dev
 
@@ -43,7 +42,7 @@ db-fixtures: ## Load the fixtures
 
 .PHONY: db-schema
 db-schema: ## Create the database schema
-	$(disable-xdebug) symfony console doctrine:database:drop --if-exists --force --env=$(env)
+	[ -d var/app.db ] || rm var/app.db
 	$(disable-xdebug) symfony console doctrine:database:create --env=$(env)
 	$(disable-xdebug) symfony console doctrine:migration:migrate --no-interaction --allow-no-migration --env=$(env)
 
@@ -59,19 +58,19 @@ test: test-unit test-component test-integration  ## Run the tests
 
 .PHONY: test-unit
 test-unit: ## Run the tests
-	$(disable-xdebug) php $(tools-bin-dir)/phpunit --testsuite=unit -c tools/phpunit.xml
+	$(disable-xdebug) php $(tools-bin-dir)/simple-phpunit --testsuite=unit -c tools/phpunit.xml
 
 .PHONY: test-component
 test-component: ## Run the tests
-	$(disable-xdebug) php $(tools-bin-dir)/phpunit --testsuite=component -c tools/phpunit.xml
+	$(disable-xdebug) php $(tools-bin-dir)/simple-phpunit --testsuite=component -c tools/phpunit.xml
 
 .PHONY: test-integration
 test-integration: ## Run the tests
-	$(disable-xdebug) php $(tools-bin-dir)/phpunit --testsuite=integration -c tools/phpunit.xml
+	$(disable-xdebug) php $(tools-bin-dir)/simple-phpunit --testsuite=integration -c tools/phpunit.xml
 
 .PHONY: test
 test-coverage: ## Run the tests
-	$(enable-xdebug) php $(tools-bin-dir)/phpunit --testdox -c tools/phpunit.xml
+	php $(tools-bin-dir)/simple-phpunit --testdox -c tools/phpunit.xml
 
 .PHONY: qa-phpstan
 qa-phpstan: ## Run PHPStan
