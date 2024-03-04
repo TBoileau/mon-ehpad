@@ -1,5 +1,7 @@
-controllers:
+security_controllers:
     resource:
-        path: ../src/Controller/
-        namespace: App\Controller
+        path: ../src/Security/UserInterface/Controller/
+        namespace: App\Security\UserInterface\Controller
     type: attribute
+    prefix: /api/security/
+    name_prefix: security_

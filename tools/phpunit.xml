@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="../vendor/phpunit/phpunit/phpunit.xsd"
-         backupGlobals="false"
          colors="true"
          bootstrap="../tests/bootstrap.php"
 >
@@ -17,12 +14,18 @@
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
-            <directory>../tests</directory>
+        <testsuite name="unit">
+            <directory>../tests/Unit</directory>
+        </testsuite>
+        <testsuite name="component">
+            <directory>../tests/Component</directory>
+        </testsuite>
+        <testsuite name="integration">
+            <directory>../tests/Integration</directory>
         </testsuite>
     </testsuites>
 
-    <coverage pathCoverage="true">
+    <coverage>
         <include>
             <directory suffix=".php">../src</directory>
         </include>
@@ -33,7 +36,7 @@
     </coverage>
 
     <logging>
-        <junit outputFile="tools/var/phpunit/junit.xml"/>
+        <junit outputFile="var/phpunit/junit.xml"/>
     </logging>
 
     <listeners>

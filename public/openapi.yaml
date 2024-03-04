@@ -1,0 +1,113 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Mon EHPAD
+  description: Mon EHPAD est une application web qui permet de gérer les résidents d'un EHPAD.
+  license:
+    identifier:
+    name: MIT
+  contact:
+    name: API Support
+    url: https://github.com/TBoileau/mon-ehpad
+    email: tboileau.info@gmail.com
+servers:
+  - url: https://127.0.0.1:8000
+    description: local
+tags:
+  - name: Security
+paths:
+  /api/security/sign-up:
+    post:
+      tags:
+        - Security
+      summary: Sign Up
+      description: Create a new organization administrator
+      operationId: signUp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUpRequest'
+      responses:
+        302:
+          description: Redirect to onboarding
+          headers:
+            Location:
+              schema:
+                type: string
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+        422:
+          description: Unprocessable entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorResponse'
+components:
+  schemas:
+    InternalServerErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+      example:
+        message: Internal server error
+    BadRequestResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+      example:
+        message: Bad request
+    UnprocessableEntityResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Violation'
+      example:
+        - propertyPath: email
+          message: This value is already used
+        - propertyPath: password
+          message: This value is too short
+    Violation:
+        type: object
+        properties:
+            propertyPath:
+              type: string
+            message:
+              type: string
+        required:
+            - propertyPath
+            - message
+        example:
+            propertyPath: email
+            message: This value is already used
+    SignUpRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+      required:
+        - email
+        - password
+      example:
+        email: user@email.com
+        password: Password123!
